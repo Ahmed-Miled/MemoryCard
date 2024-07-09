@@ -1,0 +1,21 @@
+#root {
+  max-height: 100vh;
+  margin: 0 ;
+  display: flex;
+  flex-direction: column;
+}
+body{
+  margin: 0;
+}
+.gameBoard {
+  border: 1px solid red;
+  height: 85vh;
+}
+.scoreBoard {
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+  justify-content: center;
+  align-items: center;
+}

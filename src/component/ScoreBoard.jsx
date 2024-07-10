@@ -1,5 +1,5 @@
 import '../styles/scoreBoard.css';
-export default function ScoreBoard({ score, bestScore}) {
+export default function ScoreBoard({ score, bestScore }) {
   return (
     <div className='scoreBoard'>
       <div className='title'>Memory Game</div>

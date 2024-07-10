@@ -1,17 +1,51 @@
-export default function RenderRandomPokemon({ cards, onClick }) {
+export default function RenderRandomPokemon({
+  cards,
+  onClick,
+  setChosenCards,
+  setScore,
+  chosenCards,
+  bestScore,
+  setBestScore,
+}) {
   if (!cards || !cards.sprites) {
-    return <p>Loading...</p>;
+    return (
+      <div className='loading'>
+        <div className='loading-spinner'></div>
+      </div>
+    );
   }
-  console.log(cards);
-  
+  const handelClick = (e) => {
+    const key = e.currentTarget.dataset.key;
+    if (!chosenCards.includes(key)) {
+      setScore((prevScore) => {
+        const newScore = prevScore + 1;
+        if (newScore > bestScore) {
+          setBestScore(newScore);
+        }
+        return newScore;
+      });
+      setChosenCards((prev) => [...prev, key]);
+    } else {
+      setScore(0);
+      setChosenCards([]);
+    }
 
+    onClick();
+  };
   return (
-    <div className="card" key={cards.id}onClick={onClick}>
+    <div
+      className='card'
+      key={cards.id}
+      data-key={cards.id}
+      onClick={handelClick}
+    >
       <p> {cards.name} </p>
       {cards ? (
         <img src={cards.sprites.front_default} alt={cards.name} />
       ) : (
-        <p>Loading ...</p>
+        <div className='loading'>
+          <div className='loading-spinner'></div>
+        </div>
       )}
     </div>
   );

@@ -1,7 +1,7 @@
 export default async function FetchCards() {
   try {
     const cardData = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 8; i++) {
       const randomId = Math.floor(Math.random() * 898) + 1;
       const API_URL = `https://pokeapi.co/api/v2/pokemon/${randomId}`;
       const response = await fetch(API_URL);

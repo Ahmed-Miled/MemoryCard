@@ -17,9 +17,8 @@ function App() {
   const [bestScore, setBestScore] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [cards, setCards] = useState([]);
-
+  const [chosenCards, setChosenCards] = useState([]);
   useEffect(() => {
-    console.log('useEffect triggered');
     const fetchData = async () => {
       try {
         const cardData = await FetchCards();
@@ -33,23 +32,31 @@ function App() {
     fetchData();
   }, []);
 
-  console.log('App rendered');
-
   if (isLoading) {
-    return <div className='loading'>Loading...</div>;
+    return (
+      <div className='loading'>
+        <div className='loading-spinner'></div>
+      </div>
+    );
   }
 
   const handelClick = () => {
-    console.log(cards);
     const shuffledCards = shuffleArray([...cards]);
     setCards(shuffledCards);
-    console.log('array shoffeled');
   };
 
   return (
     <>
       <ScoreBoard score={score} bestScore={bestScore} />
-      <GameBoard cards={cards} onClick={handelClick} />
+      <GameBoard
+        cards={cards}
+        onClick={handelClick}
+        setChosenCards={setChosenCards}
+        chosenCards={chosenCards}
+        setScore={setScore}
+        bestScore={bestScore}
+        setBestScore={setBestScore}
+      />
     </>
   );
 }
